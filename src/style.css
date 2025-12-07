@@ -22,6 +22,7 @@
   --muted: #9ca3af;
   --accent: #5865f2;
   --danger: #ef4444;
+  --bg : #f3f4f6;
 }
 
 a {
@@ -34,7 +35,7 @@ a:hover {
 }
 
 body {
-  background-color: #f3f4f6;
+  background-color: var(--bg);
 }
 
 h1 {

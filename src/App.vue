@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex">
     <!-- SIDEBAR -->
-    <aside :class="['flex-shrink-0 w-100 p-6 flex flex-col justify-between transition-all duration-300 fixed left-0 top-0 h-full z-40',sidebarOpen ? 'translate-x-0' : '-translate-x-full']"style="background:var(--bg-dark);">
+    <aside :class="['flex-shrink-0 w-80 p-6 flex flex-col justify-between transition-all duration-300 fixed left-0 top-0 h-full z-40',sidebarOpen ? 'translate-x-0' : '-translate-x-full']"style="background:var(--bg-dark);">
     <div>
         <div class="flex items-center gap-3 mb-8 mt-10">
           <div class="w-12 h-12 flex items-center justify-center rounded-md bg-[rgba(88,101,242,0.15)]">
@@ -59,31 +59,33 @@
     </button>
 
     <!-- MAIN CONTENT -->
-    <main class="p-8 transition-all duration-300 w-full":class="sidebarOpen ? 'ml-100' : 'ml-0'">
-      <!-- header / search -->
-      <div class="flex items-center gap-6 mb-6 w-full">
-        <div class="flex-1">
-          <div class="relative">
-            <input v-model="search" placeholder="Buscar" class="w-full rounded-lg py-3 px-10 text-gray-700 bg-gray-200 placeholder:text-gray-500" />
-            <svg class="absolute left-3 top-3 w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
+    <main class="p-8 mt-10 transition-all duration-300 w-full":class="sidebarOpen ? 'ml-100' : 'ml-0'">
+      <div class="sticky top-20 z-40 bg-[var(--bg)] space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:gap-6 mb-6 w-full sticky top-10 z-40">
+          <!-- Search -->
+          <div class="flex-1 w-full mb-4 sm:mb-0">
+            <div class="relative">
+              <input v-model="search" placeholder="Buscar"
+                class="w-full rounded-lg py-3 px-10 text-gray-700 bg-gray-200 placeholder:text-gray-500" />
+              <svg class="absolute left-3 top-3 w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+                <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
           </div>
-        </div>
 
-        <div class="flex items-center gap-4">
-          <button class="primary-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-filter"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" /></svg>
-          </button>
+          <!-- Filtros -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+            <!-- <button class="primary-btn w-full sm:basis-1/5 sm:flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-filter"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" /></svg>
+            </button> -->
 
-          <div class="flex items-center w-full">
-            <select v-model="filterValue"class="rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-700">
+            <select v-model="filterValue"
+              class="rounded-md border border-gray-300 px-3 py-2 bg-white text-gray-700 w-full sm:w-auto">
               <option value="">Filtrar por</option>
-              
-              <!-- Orden -->
               <option value="date">Fecha</option>
               <option value="az">Nombre A → Z</option>
               <option value="za">Nombre Z → A</option>
-
-              <!-- Categorías -->
               <option value="cat-none">Categoría: Ninguno</option>
               <option value="cat-important">Categoría: Importante</option>
               <option value="cat-personal">Categoría: Personal</option>
@@ -91,14 +93,14 @@
             </select>
           </div>
         </div>
-      </div>
 
-      <!-- "Nueva tarea" button top -->
-      <div class="mb-4">
-          <button @click="openModalFn" class="w-40 primary-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+        <!-- "Nueva tarea" button top -->
+        <div class="mb-4 sticky top-24 z-40">
+          <button @click="openModalFn" class="primary-btn w-full sm:w-40">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"stroke-linecap="round" stroke-linejoin="round"class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
             Nueva tarea
           </button>
+        </div>
       </div>
 
       <!-- Sections:-->
@@ -460,11 +462,12 @@ function confirmDelete() {
 // --- Terminar tarea ---
 const showFinishToast = ref(false)
 
-function finishTask(task) {
+async function finishTask(task) {
   task.isFading = true
 
-  setTimeout(() => {
+  setTimeout(async () => {
     tasks.value = tasks.value.filter(t => t.id !== task.id)
+    await db.delete("tasks", task.id)   //borra en IndexedDB también
 
     showFinishToast.value = true
     setTimeout(() => (showFinishToast.value = false), 2000)
