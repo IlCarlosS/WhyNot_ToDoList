@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  /* Aquí le decimos a Tailwind que use nuestras variables de CSS */
+  --color-accent: var(--app-accent-color);
+  --color-bg-main: #EFEFEF;
+  --color-bg-dark: #2C2C30;
+  --color-surface: #3C3C40;
+  --color-success: #35A85A;
+  --color-danger: #E53935;
+  --radius-custom: 12px;
+}
+
+:root {
+  /* Valores por defecto */
+  --app-accent-color: #4F67D8;
+  /* --color-accent: #4F67D8; */
+  --color-bg-main: #EFEFEF;
+  --color-bg-dark: #2C2C30;
+  --color-surface: #3C3C40;
+  --color-success: #35A85A;
+  --color-danger: #E53935;
+  --radius-custom: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Transición suave para evitar cambios bruscos visuales */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+/* Estilo global para los links activos del Nav */
+.router-link-active {
+  background-color: var(--color-accent);
+  color: white;
+  border-radius: var(--radius-custom);
+}
+
+/* Esto va al final de tu src/assets/main.css */
+
+/* Variables para usar en cualquier lado sin Tailwind si hace falta */
+:root {
+  --accent-color: #4F67D8;
+  --custom-radius: 12px;
+}
+
+/* Estilo para el link activo del menú */
+.router-link-active {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+  border-radius: var(--custom-radius) !important;
+}
+
+/* Utility classes manuales por si Tailwind sigue molestando */
+.bg-accent { background-color: var(--accent-color); }
+.rounded-custom { border-radius: var(--custom-radius); }

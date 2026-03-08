@@ -1,0 +1,103 @@
+<script setup>
+import { reactive, watch } from 'vue'
+import { useNoteStore } from '../stores/noteStore'
+import { useToast } from '../composables/useToast'
+
+const props = defineProps({
+  show: Boolean,
+  noteToEdit: Object
+})
+
+const emit = defineEmits(['close'])
+const noteStore = useNoteStore()
+const { showToast } = useToast()
+
+const form = reactive({
+  title: '',
+  content: '',
+  color: ''
+})
+
+// VIGILANTE: Cuando el modal se abre, cargamos los datos de la nota seleccionada
+watch(() => props.show, (isShowing) => {
+  if (isShowing && props.noteToEdit) {
+    form.title = props.noteToEdit.title
+    form.content = props.noteToEdit.content
+    form.color = props.noteToEdit.color
+  }
+})
+
+const handleSubmit = async () => {
+  if (!form.title.trim()) return
+
+  try {
+    await noteStore.updateNote(props.noteToEdit.id, { ...form })
+    showToast("Nota actualizada")
+    emit('close')
+  } catch (error) {
+    showToast("Error al actualizar", "error")
+  }
+}
+</script>
+
+<template>
+  <Transition name="modal">
+    <div v-if="show" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+      <div class="bg-bg-dark w-full max-w-lg rounded-2xl p-8 border border-surface shadow-2xl relative">
+        
+        <button @click="emit('close')" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12M6 6l12 12"/></svg>
+        </button>
+
+        <h2 class="text-2xl font-bold text-white mb-6">Editar Nota</h2>
+
+        <form @submit.prevent="handleSubmit" class="space-y-6">
+          <div>
+            <label class="block text-gray-400 text-sm mb-2 font-medium">Título *:</label>
+            <input 
+              v-model="form.title"
+              type="text" 
+              required
+              class="w-full bg-surface border border-gray-600/30 rounded-lg p-3 text-white focus:ring-2 focus:ring-accent outline-none"
+            >
+          </div>
+
+          <div>
+            <label class="block text-gray-400 text-sm mb-3 font-medium">Cambiar color:</label>
+            <div class="flex flex-wrap gap-3">
+              <button 
+                v-for="color in noteStore.availableColors" 
+                :key="color.class"
+                type="button"
+                @click="form.color = color.class"
+                :class="[
+                  color.class, 
+                  'w-8 h-8 rounded-full border-2 transition-all',
+                  form.color === color.class ? 'border-white scale-125' : 'border-transparent opacity-50'
+                ]"
+              ></button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-gray-400 text-sm mb-2 font-medium">Contenido:</label>
+            <textarea 
+              v-model="form.content"
+              rows="6"
+              class="w-full bg-surface border border-gray-600/30 rounded-lg p-3 text-white focus:ring-2 focus:ring-accent outline-none resize-none"
+            ></textarea>
+          </div>
+
+          <div class="flex justify-end space-x-3 pt-4">
+            <button type="button" @click="emit('close')" class="px-6 py-2.5 rounded-lg border border-gray-600 text-gray-300">
+              Cancelar
+            </button>
+            <button type="submit" class="px-8 py-2.5 rounded-lg !bg-accent text-white font-semibold shadow-lg shadow-accent/20">
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </Transition>
+</template>
