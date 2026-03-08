@@ -62,7 +62,7 @@ https://ilcarloss.github.io/WhyNot_ToDoList/
 o instalar en para su uso y modificación local.
 1. Clona el repositorio:
 ```
-git clone https://github.com/tu-usuario/nombre-repo.git
+git clone https://github.com/IlCarlosS/WhyNot_ToDoList.git
 ```
 2. Instala las dependencias:
 ```
