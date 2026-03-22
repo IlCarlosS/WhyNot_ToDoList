@@ -1,15 +1,14 @@
 <template>
-  <div class="max-w-5xl mx-auto p-6">
-    <div class="flex justify-between items-center mb-10">
+  <div class="max-w-5xl mx-auto p-2 sm:p-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-8 sm:mb-10">
       <div>
-        <h2 class="text-3xl font-bold text-bg-dark">Mis Tareas</h2>
-        <p class="text-gray-500">Organiza tu día, un paso a la vez.</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-bg-dark">Mis Tareas</h2>
+        <p class="text-gray-500 text-sm sm:text-base">Organiza tu día, un paso a la vez.</p>
       </div>
       
       <button 
         @click="openNewTaskModal"
-        
-        class="!bg-accent text-white px-6 py-3 rounded-custom font-semibold flex items-center hover:scale-105 transition-transform shadow-lg shadow-accent/20"
+        class="w-full sm:w-auto !bg-accent text-white px-6 py-3 rounded-custom font-semibold flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-accent/20"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
         Nueva Tarea
@@ -26,13 +25,13 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-4.5 text-gray-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
     </div>
 
-    <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8">
       
-      <div class="flex flex-wrap items-center gap-4">
-        <div class="relative">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div class="relative w-full sm:w-auto">
           <select 
             v-model="selectedCategory"
-            class="appearance-none bg-white pl-10 pr-10 py-2.5 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer"
+            class=" w-full appearance-none bg-white pl-10 pr-10 py-2.5 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer"
           >
             <option value="all">Todas las categorías</option>
             <option v-for="cat in categories" :key="cat.id" :value="cat.id">
@@ -46,7 +45,7 @@
 
         <select 
           v-model="sortBy"
-          class="bg-white px-4 py-2.5 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer"
+          class="w-full sm:w-auto bg-white px-4 py-2.5 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer"
         >
           <option value="date">Ordenar por: Fecha</option>
           <option value="az">Ordenar por: A → Z</option>
@@ -54,18 +53,18 @@
         </select>
       </div>
 
-      <div class="flex bg-gray-200/50 p-1 rounded-xl">
+      <div class="flex bg-gray-200/50 p-1 rounded-xl w-full sm:w-auto">
         <button 
           @click="statusFilter = 'all'"
           :class="statusFilter === 'all' ? 'bg-white text-accent shadow-sm' : 'text-gray-500'"
-          class="px-6 py-2 rounded-custom transition-all font-medium text-sm"
+          class=" flex-1 sm:flex-none px-6 py-2 rounded-custom transition-all font-medium text-sm"
         >
           Todas
         </button>
         <button 
           @click="statusFilter = 'pending'"
           :class="statusFilter === 'pending' ? 'bg-white text-accent shadow-sm' : 'text-gray-500'"
-          class="px-6 py-2 rounded-custom transition-all font-medium text-sm"
+          class=" flex-1 sm:flex-none px-6 py-2 rounded-custom transition-all font-medium text-sm"
         >
           Pendientes
         </button>
@@ -89,7 +88,7 @@
 
     <div v-else class="grid grid-cols-1 gap-4"></div>
 
-    <div class="max-w-5xl mx-auto p-6">
+    <div class="max-w-5xl mx-auto p-0">
       <div v-if="taskStore.tasks.length > 0" class="space-y-4">
         <TaskCard 
           v-for="task in filteredTasks" 
@@ -114,8 +113,6 @@
         />  
     </div>
   </div>
-
-
 </template>
 
 <style scoped>

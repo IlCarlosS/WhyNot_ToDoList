@@ -77,7 +77,7 @@ const colors = [
               <svg :class="{'rotate-180': openSection === 'credits'}" class="transition-transform text-gray-500" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div v-if="openSection === 'credits'" class="mt-3 text-gray-400 text-xs space-y-1 animate-fade-down">
-              <p><b>Versión:</b> 2.1.0-beta</p>
+              <p><b>Versión:</b> 2.2.0-beta</p>
               <p><b>Tecnologías:</b> Vue 3, Vite, Tailwind CSS, Pinia, Dexie.js</p>
               <p>Desarrollado con ❤️ para organizar tu mundo.</p>
             </div>

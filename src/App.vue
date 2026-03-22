@@ -1,14 +1,20 @@
 <template>
-  <div class="flex h-screen overflow-hidden">
+  <div class="flex h-screen overflow-hidden bg-bg-main">
+    <div 
+      v-if="!isCollapsed" 
+      @click="isCollapsed = true"
+      class="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
+    ></div>
+
     <aside 
-      class="relative bg-bg-dark text-bg-main p-4 flex flex-col justify-between transition-all duration-300 ease-in-out"
+      class="fixed lg:relative z-50 bg-bg-dark text-bg-main p-4 flex flex-col justify-between transition-all duration-300 ease-in-out h-full shadow-2xl lg:shadow-none"
       :class="isCollapsed ? 'w-20' : 'w-64'"
     >
       <button 
         @click="toggleSidebar" 
-        class="absolute -right-5 top-20 !bg-accent text-white rounded-full p-1 shadow-lg hover:scale-110 transition-transform z-50"
+        class="absolute -right-6 sm:-right-6 top-24 !bg-accent text-white rounded-full p-2.5 sm:p-1 shadow-lg hover:scale-110 transition-transform z-50"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="isCollapsed ? 'rotate-180' : ''" class="transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-5 sm:h-5 transition-transform duration-300" :class="isCollapsed ? 'rotate-180' : ''" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M15 6l-6 6l6 6" />
         </svg>
       </button>
@@ -37,11 +43,6 @@
         </nav>
       </div>
 
-      <!-- <router-link to="/configuracion" class="flex items-center p-3 text-gray-400 hover:text-white group">
-        <svg xmlns="http://www.w3.org/2000/svg" class="min-w-[24px] mr-3" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>
-        <span v-show="!isCollapsed" class="whitespace-nowrap overflow-hidden">Configuración</span>
-      </router-link> -->
-
       <button 
         @click="isConfigOpen = true" 
         class="w-full flex items-center p-3 text-gray-400 hover:text-white group transition-colors"
@@ -53,22 +54,21 @@
       <ConfigModal :show="isConfigOpen" @close="isConfigOpen = false" />
     </aside>
 
-
-    <main class="flex-1 flex flex-col overflow-hidden bg-bg-main ">
-      <header class="h-16 border-b border-surface flex items-center justify-between px-8 text-bg-main backdrop-blur-sm bg-bg-dark">
-        <span class="italic text-base font-light tracking-wide opacity-90">
+    <main class="flex-1 flex flex-col overflow-hidden ml-20 lg:ml-0 transition-all duration-300">
+      <header class=" bg-bg-dark h-16 border-b border-surface flex items-center justify-between px-4 sm:px-8 text-bg-main backdrop-blur-md bg-bg-dark/95 sticky top-0 z-30">
+        <span class="italic text-xs sm:text-base font-light tracking-wide opacity-90 truncate mr-4">
           "{{ fraseActual }}"
         </span>
 
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 flex-shrink-0">
           <div class="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-          <span class="font-mono text-lg font-medium tracking-tighter">
+          <span class="hidden sm:block font-mono text-sm sm:text-lg font-medium tracking-tighter">
             {{ horaActual }}
           </span>
         </div>
       </header>
 
-      <section class="flex-1 overflow-y-auto p-8">
+      <section class="flex-1 overflow-y-auto p-4 sm:p-8">
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
@@ -78,7 +78,6 @@
     </main>
   </div>
 
-  <!-- modal -->
   <Transition name="toast">
     <div v-if="isVisible" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] !bg-accent text-white px-6 py-3 rounded-full shadow-2xl font-medium flex items-center space-x-2">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>

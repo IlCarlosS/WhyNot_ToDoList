@@ -108,36 +108,38 @@ const selectDay = (date) => {
 </script>
 
 <template>
-  <div class="p-6 max-w-7xl mx-auto text-white">
-    <div class="mb-8">
-      <h3 class="text-sm font-bold text-gray-500 tracking-widest mb-2">CALENDARIO</h3>
+  <div class="max-w-5xl mx-auto p-2 sm:p-6 text-white">
+    
+    <div class="mb-6 sm:mb-8">
+      <h3 class="text-xl sm:text-3xl font-bold text-bg-dark mb-4 sm:mb-2 tracking-wider">Calendario</h3>
       
-      <div class="flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-4">
-          <h2 class="text-2xl font-black text-bg-dark">{{ currentMonthName }}</h2>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        
+        <div class="flex items-center justify-between sm:justify-start gap-4">
+          <h2 class="text-3xl font-black text-bg-dark min-w-[140px]">{{ currentMonthName }}</h2>
           <div class="flex gap-2">
-            <button @click="prevMonth" class="p-2 !bg-accent rounded-lg hover:!bg-accent transition-colors">
+            <button @click="prevMonth" class="p-2.5 !bg-accent rounded-lg hover:opacity-90 transition-all shadow-md">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
-            <button @click="nextMonth" class="p-2 !bg-accent rounded-lg hover:!bg-accent transition-colors">
+            <button @click="nextMonth" class="p-2.5 !bg-accent rounded-lg hover:opacity-90 transition-all shadow-md">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </button>
           </div>
         </div>
 
-        <div class="flex items-center gap-4">
-            <span class="text-gray-400 font-bold">Ir a Fecha:</span>
-            <select @change="handleMonthChange" :value="currentDate.getMonth()" class="bg-surface p-2 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer">
-                <option v-for="(m, idx) in months" :key="m" :value="idx">{{ m }}</option>
-            </select>
-            <select @change="handleYearChange" :value="currentDate.getFullYear()" class="bg-surface p-2 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer">
-                <option v-for="y in years" :key="y" :value="y">{{ y }}</option>
-            </select>
+        <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+            <div class="flex flex-1 items-center gap-2 bg-white/5 p-1 rounded-xl sm:bg-transparent sm:p-0">
+                <select @change="handleMonthChange" :value="currentDate.getMonth()" class="flex-1 bg-surface p-2.5 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer text-white">
+                    <option v-for="(m, idx) in months" :key="m" :value="idx">{{ m }}</option>
+                </select>
+                <select @change="handleYearChange" :value="currentDate.getFullYear()" class="flex-1 bg-surface p-2.5 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer text-white">
+                    <option v-for="y in years" :key="y" :value="y">{{ y }}</option>
+                </select>
+            </div>
           
             <button 
                 @click="openNewTaskModal"
-                
-                class="!bg-accent text-white px-6 py-3 rounded-custom font-semibold flex items-center hover:scale-105 transition-transform shadow-lg shadow-accent/20"
+                class="w-full sm:w-auto !bg-accent text-white px-6 py-3.5 rounded-custom font-bold flex items-center justify-center hover:scale-105 transition-transform shadow-lg shadow-accent/20"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
                 Nueva Tarea
@@ -146,57 +148,60 @@ const selectDay = (date) => {
       </div>
     </div>
 
-    <!-- Calendario UI -->
-    <div class="border border-indigo-500/30 rounded-2xl overflow-hidden shadow-2xl">
+    <div class="border border-indigo-500/20 rounded-2xl overflow-hidden shadow-2xl bg-[#1a1a1a]">
       <div class="grid grid-cols-7 !bg-accent">
-        <div v-for="day in weekDays" :key="day" class="py-3 text-bg-dark text-center font-bold text-sm">
-          {{ day }}
+        <div v-for="day in weekDays" :key="day" class="py-3 text-bg-dark text-center font-bold text-xs sm:text-sm uppercase tracking-tighter sm:tracking-normal">
+          <span class="block sm:hidden">{{ day.substring(0, 1) }}</span>
+          <span class="hidden sm:block">{{ day }}</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-7 gap-[1px] bg-gray-800">
+      <div class="grid grid-cols-7 gap-[1px] bg-gray-800/50">
         <div 
           v-for="date in days" 
           :key="date.toString()"
           @click="selectDay(date)"
           :class="[
-            'min-h-[120px] p-2 transition-all cursor-pointer relative flex flex-col border-2',
-            isSameMonth(date, currentDate) ? 'bg-[#333333]' : 'bg-gray-100 text-gray-400',
-            isSameDay(date, selectedDate) ? 'border-indigo-500 z-10 scale-[1.02] shadow-xl' : 'border-transparent hover:border-gray-600',
-            isToday(date) && !isSameDay(date, selectedDate) ? 'ring-2 ring-inset ring-accent' : ''
+            'min-h-[70px] sm:min-h-[120px] p-1 sm:p-2 transition-all cursor-pointer relative flex flex-col border-2',
+            isSameMonth(date, currentDate) ? 'bg-[#242424]' : 'bg-[#1a1a1a] text-gray-600',
+            isSameDay(date, selectedDate) ? 'border-accent z-10 bg-accent/5' : 'border-transparent hover:border-gray-700',
+            isToday(date) && !isSameDay(date, selectedDate) ? 'ring-2 ring-inset ring-accent/50' : ''
           ]"
         >
-          <span class="font-bold text-lg mb-1">{{ format(date, 'd') }}</span>
+          <span :class="['font-bold text-sm sm:text-lg mb-1', isToday(date) ? 'text-accent' : 'text-gray-300']">
+            {{ format(date, 'd') }}
+          </span>
 
-          <div class="flex-1 overflow-y-auto custom-scrollbar space-y-1">
-            <div 
-              v-for="task in getTasksForDate(date)" 
-              :key="task.id"
-              class="flex items-center gap-2 px-2 py-1 rounded bg-gray-800/40 hover:bg-gray-700/60 transition-colors cursor-default group"
-              :title="task.title"
-            >
-              <span 
-                :class="[
-                  task.categoryColor || '!bg-accent', 
-                  'w-2 h-2 rounded-full flex-shrink-0 shadow-sm'
-                ]"
-              ></span>
-                
-              <span class="text-[10px] font-medium text-gray-200 truncate leading-tight">
-                {{ task.title }}
-              </span>
+          <div class="flex-1 overflow-hidden space-y-1">
+            <div class="flex flex-wrap sm:flex-col gap-1">
+                <div 
+                  v-for="task in getTasksForDate(date).slice(0, 3)" 
+                  :key="task.id"
+                  class="flex items-center gap-2 sm:px-2 sm:py-1 rounded sm:bg-gray-800/40"
+                >
+                  <span 
+                    :class="[
+                      task.categoryColor || '!bg-accent', 
+                      'w-2 h-2 rounded-full flex-shrink-0 shadow-sm'
+                    ]"
+                  ></span>
+                  <span class="hidden sm:block text-[10px] font-medium text-gray-200 truncate leading-tight">
+                    {{ task.title }}
+                  </span>
+                </div>
+                <span v-if="getTasksForDate(date).length > 3" class="text-[9px] text-gray-500 font-bold sm:pl-2">
+                    +{{ getTasksForDate(date).length - 3 }}
+                </span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <TaskModal :show="showModal" @close="showModal = false" /> 
-
-    <div class="mt-12 animate-fade-in">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-surface">
+    <div class="mt-8 sm:mt-12 animate-fade-in px-1">
+      <h2 class="text-xl sm:text-2xl font-bold mb-6 flex items-center gap-3 text-accent">
         Tareas de {{ selectedDateFormatted }}
-        <span v-if="selectedDateTasks.length > 0" class="!bg-accent text-bg-main text-xs px-2 py-1 rounded-full">
+        <span v-if="selectedDateTasks.length > 0" class="!bg-accent text-white text-[10px] px-2.5 py-1 rounded-full font-black">
           {{ selectedDateTasks.length }}
         </span>
       </h2>
@@ -205,68 +210,45 @@ const selectDay = (date) => {
         <div 
           v-for="task in selectedDateTasks" 
           :key="task.id"
-          class="bg-surface border border-gray-700/50 p-4 rounded-xl flex items-center justify-between hover:border-indigo-500/50 transition-all group shadow-lg"
+          class="bg-[#242424] border border-gray-700/50 p-4 rounded-xl flex items-center justify-between hover:border-accent/50 transition-all group shadow-lg"
         >
-          <div class="flex items-center gap-4">
-            <div :class="[task.categoryColor || '!bg-accent', 'w-4 h-4 rounded-full shadow-sm']"></div>
-            
-            <div>
-              <h4 class="font-bold text-white group-hover:text-indigo-400 transition-colors">
+          <div class="flex items-center gap-4 overflow-hidden">
+            <div :class="[task.categoryColor || '!bg-accent', 'w-3 h-3 sm:w-4 sm:h-4 rounded-full shadow-sm flex-shrink-0']"></div>
+            <div class="truncate">
+              <h4 class="font-bold text-gray-100 group-hover:text-accent transition-colors truncate">
                 {{ task.title }}
               </h4>
-              <p class="text-gray-500 text-sm">
-                {{ format(parseLocalDate(task.dueDate), "dd 'de' MMMM, yyyy", { locale: es }) }}
+              <p class="text-gray-500 text-xs sm:text-sm">
+                {{ format(parseLocalDate(task.dueDate), "dd 'de' MMMM", { locale: es }) }}
               </p>
             </div>
           </div>
 
           <button 
             @click="$router.push('/tareas')" 
-            class="!bg-accent/20 text-indigo-400 px-4 py-2 rounded-lg text-sm font-bold hover:!bg-accent/100 hover:text-white transition-all"
+            class="flex-shrink-0 ml-4 !bg-accent/10 text-accent px-3 py-2 rounded-lg text-xs font-bold hover:!bg-accent hover:text-white transition-all"
           >
-            Ir a tarea
+            Ver más
           </button>
         </div>
       </div>
 
       <div 
         v-else 
-        class="flex flex-col items-center justify-center py-16 text-center rounded-3xl border border-dashed border-gray-700"
+        class="flex flex-col items-center justify-center py-12 text-center rounded-3xl border border-dashed border-gray-700 bg-main"
       >
-        <div class="w-32 h-32 mb-6 opacity-20">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-gray-400">
+        <div class="w-20 h-20 mb-4 opacity-20">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full text-gray-400">
             <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/><path d="M19 3v4"/><path d="M21 5h-4"/>
           </svg>
         </div>
-        <h3 class="text-xl font-semibold text-gray-500 mb-1">Día de descanso...</h3>
-        <p class="text-gray-600 max-w-xs mx-auto text-sm">
-          No tienes tareas programadas para esta fecha. ¡Disfruta tu tiempo libre!
+        <h3 class="text-lg font-semibold text-accent">Día despejado</h3>
+        <p class="text-bg-dark max-w-[240px] mx-auto text-xs mt-1">
+          No hay nada pendiente para hoy. ¡Buen momento para un café!
         </p>
       </div>
     </div>
 
+    <TaskModal :show="showModal" @close="showModal = false" /> 
   </div>
 </template>
-
-<style scoped>
-/* Reutilizamos o ajustamos tu custom-scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 3px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-}
-.custom-scrollbar:hover::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
