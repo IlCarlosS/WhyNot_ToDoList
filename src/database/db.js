@@ -1,5 +1,5 @@
+//db.js
 import Dexie from 'dexie';
-
 export const db = new Dexie('WhyNotDB');
 
 // Definimos el esquema de tablas

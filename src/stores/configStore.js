@@ -1,5 +1,5 @@
+//configStore.js
 import { defineStore } from 'pinia'
-
 export const useConfigStore = defineStore('config', {
   state: () => ({
     accentColor: localStorage.getItem('accent-color') || '#4F67D8',

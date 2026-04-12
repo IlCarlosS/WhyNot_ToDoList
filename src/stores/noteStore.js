@@ -1,3 +1,4 @@
+//noteStore.js
 import { defineStore } from 'pinia'
 import { db } from '../database/db' // Usamos la misma DB de Dexie
 

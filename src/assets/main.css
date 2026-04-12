@@ -21,6 +21,7 @@
   --color-success: #35A85A;
   --color-danger: #E53935;
   --radius-custom: 12px;
+  --custom-radius: 12px;
 }
 
 body {
@@ -38,25 +39,11 @@ body {
 
 /* Estilo global para los links activos del Nav */
 .router-link-active {
-  background-color: var(--color-accent);
+  background-color: var(--app-accent-color) !important; /* Usa la misma variable del picker */
   color: white;
   border-radius: var(--radius-custom);
 }
 
-/* Esto va al final de tu src/assets/main.css */
-
-/* Variables para usar en cualquier lado sin Tailwind si hace falta */
-:root {
-  --accent-color: #4F67D8;
-  --custom-radius: 12px;
-}
-
-/* Estilo para el link activo del menú */
-.router-link-active {
-  background-color: var(--accent-color) !important;
-  color: white !important;
-  border-radius: var(--custom-radius) !important;
-}
 
 /* Utility classes manuales por si Tailwind sigue molestando */
 .bg-accent { background-color: var(--accent-color); }

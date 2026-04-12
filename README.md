@@ -1,6 +1,10 @@
 # Why Not? Gestión de Tareas y Notas
 Una aplicación web de gestión personal diseñada para eliminar el "ruido" visual y reducir la ansiedad que suelen provocar las listas de tareas interminables.
 
+### Actualización 2.3.0-estable
+- Correción de errores en los colores de la nav bar. (App.vue).
+- Se añade la opción de importar y exportar las tareas y notas mediante el uso de archivos .json. Se añade el archivo: src/utils/backupHandler.js. Y se modifica: db.js, useToast.js, ConfigModal.vue.
+
 ## Filosofía UI/UX: El Enfoque "Anti-Ansiedad"
 A diferencia de otras herramientas de productividad que saturan al usuario con notificaciones y dashboards complejos, TaskFlow se basa en tres pilares de diseño:
 
@@ -24,6 +28,7 @@ src/
 ├── router/          # Configuración de rutas (Vue Router).
 ├── stores/          # Estados globales con Pinia (taskStore, configStore).
 ├── views/           # Vistas principales (Tareas.vue, Notas.vue, Calendario.vue).
+├── utils/           # Archivo con la función de importar y exportar los datos (archivos .json).
 └── App.vue          # Componente raíz con el Layout principal y Sidebar.
 ```
 
@@ -47,7 +52,7 @@ Esta sección actúa como una "caja de ideas" rápido para evitar la sobrecarga 
 - Categorización Visual: Cada nota puede ser etiquetada con colores específicos, lo que permite al cerebro clasificar información de un vistazo (por ejemplo: amarillo para ideas, rojo para urgencias).
 - Persistencia Atómica: Cada vez que una nota se crea o edita, se sincroniza individualmente con el Store y la base de datos local, asegurando que ninguna idea se pierda aunque se cierre el navegador inesperadamente.
 
-### Calendario Inteligente (Calendario.vue
+### Calendario Inteligente (Calendario.vue)
 - Normalización de fechas: Manejo de desfases UTC para asegurar que las tareas aparezcan en el día correcto según la zona horaria local del usuario.
 - Resumen Diario: Una función de filtrado computado que muestra detalles específicos al hacer clic en cualquier día del mes.
 
@@ -68,11 +73,15 @@ git clone https://github.com/IlCarlosS/WhyNot_ToDoList.git
 ```
 npm install
 ```
-3. Ejecuta en modo desarrollo:
+3. Navega a la direccion de la carpeta:
+```
+cd why-not-app
+```
+4. Ejecuta en modo desarrollo:
 ```
 npm run dev
 ```
-4. Construye para producción:
+5. Construye para producción:
 ```
 npm run build
 ```
