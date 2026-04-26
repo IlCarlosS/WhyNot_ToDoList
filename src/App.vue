@@ -12,6 +12,7 @@
     >
       <button 
         @click="toggleSidebar" 
+        :aria-label="isCollapsed ? 'Expandir barra lateral' : 'Contraer barra lateral'"
         class="absolute -right-6 sm:-right-6 top-24 !bg-accent text-white rounded-full p-2.5 sm:p-1 shadow-lg hover:scale-110 transition-transform z-50"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-5 sm:h-5 transition-transform duration-300" :class="isCollapsed ? 'rotate-180' : ''" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">

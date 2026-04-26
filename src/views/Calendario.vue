@@ -111,12 +111,12 @@ const selectDay = (date) => {
   <div class="max-w-5xl mx-auto p-2 sm:p-6 text-white">
     
     <div class="mb-6 sm:mb-8">
-      <h3 class="text-xl sm:text-3xl font-bold text-bg-dark mb-4 sm:mb-2 tracking-wider">Calendario</h3>
+      <h2 class="text-xl sm:text-3xl font-bold text-bg-dark mb-4 sm:mb-2 tracking-wider">Calendario</h2>
       
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
         <div class="flex items-center justify-between sm:justify-start gap-4">
-          <h2 class="text-3xl font-black text-bg-dark min-w-[140px]">{{ currentMonthName }}</h2>
+          <h3 class="text-2xl text-bg-dark min-w-[140px]">{{ currentMonthName }}</h3>
           <div class="flex gap-2">
             <button @click="prevMonth" class="p-2.5 !bg-accent rounded-lg hover:opacity-90 transition-all shadow-md">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
@@ -129,12 +129,18 @@ const selectDay = (date) => {
 
         <div class="flex flex-wrap items-center gap-2 sm:gap-4">
             <div class="flex flex-1 items-center gap-2 bg-white/5 p-1 rounded-xl sm:bg-transparent sm:p-0">
-                <select @change="handleMonthChange" :value="currentDate.getMonth()" class="flex-1 bg-surface p-2.5 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer text-white">
-                    <option v-for="(m, idx) in months" :key="m" :value="idx">{{ m }}</option>
-                </select>
-                <select @change="handleYearChange" :value="currentDate.getFullYear()" class="flex-1 bg-surface p-2.5 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer text-white">
+              <div> 
+                <label for="select-month" class="sr-only">Seleccionar mes</label>
+                <select id="select-month" @change="handleMonthChange" :value="currentDate.getMonth()" class="flex-1 bg-surface p-2.5 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer text-white">
+                      <option v-for="(m, idx) in months" :key="m" :value="idx">{{ m }}</option>
+                  </select>
+              </div> 
+              <div>
+                <label for="select-year" class="sr-only">Seleccionar año</label>
+                <select id="select-year" @change="handleYearChange" :value="currentDate.getFullYear()" class="flex-1 bg-surface p-2.5 rounded-lg border border-gray-700 outline-none text-sm cursor-pointer text-white">
                     <option v-for="y in years" :key="y" :value="y">{{ y }}</option>
                 </select>
+              </div>
             </div>
           
             <button 

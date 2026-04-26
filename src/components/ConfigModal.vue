@@ -46,17 +46,6 @@ const confirmImport = () => {
   showConfirmImport.value = false
   pendingFile.value = null
 }
-
-// const handleImport = (event) => {
-//   const file = event.target.files[0]
-//   if (!file) return
-
-//   if (confirm("¿Estás seguro? Se borrarán los datos actuales para cargar los del respaldo.")) {
-//     importAppData(file, { taskStore, noteStore, configStore })
-//   }
-//   // Limpiar el input para poder subir el mismo archivo dos veces si se desea
-//   event.target.value = ''
-// }
 </script>
 
 <template>
@@ -148,7 +137,7 @@ const confirmImport = () => {
               <svg :class="{'rotate-180': openSection === 'credits'}" class="transition-transform text-gray-500" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div v-if="openSection === 'credits'" class="mt-3 text-gray-400 text-xs space-y-1 animate-fade-down bg-black/20 p-3 rounded-xl">
-              <p><b>Versión:</b> 2.3.0 estable</p>
+              <p><b>Versión:</b> 2.3.1 estable</p>
               <p><b>Core:</b> Vue 3 & Dexie.js (IndexedDB)</p>
               <p><b>Estilos:</b> Tailwind CSS con variables dinámicas</p>
               <p class="pt-2 text-accent italic">Desarrollado para organizar tu mundo.</p>

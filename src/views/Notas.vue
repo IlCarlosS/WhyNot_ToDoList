@@ -74,13 +74,17 @@ const filteredNotes = computed(() => {
                 <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             </div>
 
-            <select 
-                v-model="sortBy"
-                class="bg-white px-4 py-4 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer w-full lg:w-48 text-sm font-medium"
-            >
-                <option value="az">Orden: A → Z</option>
-                <option value="za">Orden: Z → A</option>
-            </select>
+            <div>
+                <label for="sort-alphabetical" class="sr-only">Seleccionar orden alfabético</label>
+                <select 
+                    id="sort-alphabetical"
+                    v-model="sortBy"
+                    class="bg-white px-4 py-4 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer w-full lg:w-48 text-sm font-medium"
+                >
+                    <option value="az">Orden: A → Z</option>
+                    <option value="za">Orden: Z → A</option>
+                </select>
+            </div>
 
             <button 
                 @click="openNewNoteModal"

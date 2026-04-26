@@ -29,7 +29,9 @@
       
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
         <div class="relative w-full sm:w-auto">
+          <label for="category-select" class="sr-only">Filtrar por categoría</label>
           <select 
+            id="category-select"
             v-model="selectedCategory"
             class=" w-full appearance-none bg-white pl-10 pr-10 py-2.5 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer"
           >
@@ -43,7 +45,9 @@
           </div>
         </div>
 
+        <label for="sort-select" class="sr-only">Ordenar elementos</label>
         <select 
+          id="sort-select"
           v-model="sortBy"
           class="w-full sm:w-auto bg-white px-4 py-2.5 rounded-custom shadow-sm text-gray-600 focus:ring-2 focus:ring-accent outline-none cursor-pointer"
         >
