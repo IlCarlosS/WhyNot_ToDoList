@@ -117,12 +117,25 @@ const selectDay = (date) => {
         
         <div class="flex items-center justify-between sm:justify-start gap-4">
           <h3 class="text-2xl text-bg-dark min-w-[140px]">{{ currentMonthName }}</h3>
+          
           <div class="flex gap-2">
-            <button @click="prevMonth" class="p-2.5 !bg-accent rounded-lg hover:opacity-90 transition-all shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            <button 
+              @click="prevMonth" 
+              aria-label="Ir al mes anterior"
+              class="p-2.5 !bg-accent rounded-lg hover:opacity-90 transition-all shadow-md"
+            >
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
             </button>
-            <button @click="nextMonth" class="p-2.5 !bg-accent rounded-lg hover:opacity-90 transition-all shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            <button 
+              @click="nextMonth" 
+              aria-label="Ir al mes siguiente"
+              class="p-2.5 !bg-accent rounded-lg hover:opacity-90 transition-all shadow-md"
+            >
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
             </button>
           </div>
         </div>
@@ -156,7 +169,7 @@ const selectDay = (date) => {
 
     <div class="border border-indigo-500/20 rounded-2xl overflow-hidden shadow-2xl bg-[#1a1a1a]">
       <div class="grid grid-cols-7 !bg-accent">
-        <div v-for="day in weekDays" :key="day" class="py-3 text-bg-dark text-center font-bold text-xs sm:text-sm uppercase tracking-tighter sm:tracking-normal">
+        <div v-for="day in weekDays" :key="day" class="py-3 text-bg-main text-center font-bold text-xs sm:text-sm uppercase tracking-tighter sm:tracking-normal">
           <span class="block sm:hidden">{{ day.substring(0, 1) }}</span>
           <span class="hidden sm:block">{{ day }}</span>
         </div>

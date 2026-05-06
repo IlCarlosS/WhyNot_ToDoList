@@ -18,8 +18,8 @@
   --color-bg-main: #EFEFEF;
   --color-bg-dark: #2C2C30;
   --color-surface: #3C3C40;
-  --color-success: #35A85A;
-  --color-danger: #E53935;
+  --color-success: #66BB6A;
+  --color-danger: #EF5350;
   --radius-custom: 12px;
   --custom-radius: 12px;
 }
@@ -40,7 +40,7 @@ body {
 /* Estilo global para los links activos del Nav */
 .router-link-active {
   background-color: var(--app-accent-color) !important; /* Usa la misma variable del picker */
-  color: white;
+  color: rgb(247, 247, 247);
   border-radius: var(--radius-custom);
 }
 

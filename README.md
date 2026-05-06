@@ -1,9 +1,9 @@
 # Why Not? Gestión de Tareas y Notas
 Una aplicación web de gestión personal diseñada para eliminar el "ruido" visual y reducir la ansiedad que suelen provocar las listas de tareas interminables.
 
-### Actualización 2.3.0-estable
-- Correción de errores en los colores de la nav bar. (App.vue).
-- Se añade la opción de importar y exportar las tareas y notas mediante el uso de archivos .json. Se añade el archivo: src/utils/backupHandler.js. Y se modifica: db.js, useToast.js, ConfigModal.vue.
+### Actualización 2.3.3
+- Mejora en la Accesibilidad web: Se añaden Label a botones, se cambian colores "tema/accento" de la interfaz, por unos mas acorde a la paleta de colores.
+- Cambios menores en el codigo.
 
 ## Filosofía UI/UX: El Enfoque "Anti-Ansiedad"
 A diferencia de otras herramientas de productividad que saturan al usuario con notificaciones y dashboards complejos, TaskFlow se basa en tres pilares de diseño:

@@ -22,10 +22,10 @@ const toggleSection = (section) => {
 
 const colors = [
   { name: 'Azul (Default)', value: '#4F67D8' },
-  { name: 'Rojo', value: '#D84F67' },
-  { name: 'Verde', value: '#67D84F' },
-  { name: 'Naranja', value: '#D8A54F' },
-  { name: 'Cian', value: '#4FD8C7' }
+  { name: 'Coral', value: '#E57373' }, 
+  { name: 'Esmeralda', value: '#66BB6A' },      
+  { name: 'Naranja', value: '#D8A54F' },        
+  { name: 'Glaciar', value: '#4DB6AC' }
 ]
 
 // Funciones importar y exportar json
@@ -137,7 +137,7 @@ const confirmImport = () => {
               <svg :class="{'rotate-180': openSection === 'credits'}" class="transition-transform text-gray-500" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div v-if="openSection === 'credits'" class="mt-3 text-gray-400 text-xs space-y-1 animate-fade-down bg-black/20 p-3 rounded-xl">
-              <p><b>Versión:</b> 2.3.1 estable</p>
+              <p><b>Versión:</b> 2.3.3</p>
               <p><b>Core:</b> Vue 3 & Dexie.js (IndexedDB)</p>
               <p><b>Estilos:</b> Tailwind CSS con variables dinámicas</p>
               <p class="pt-2 text-accent italic">Desarrollado para organizar tu mundo.</p>
